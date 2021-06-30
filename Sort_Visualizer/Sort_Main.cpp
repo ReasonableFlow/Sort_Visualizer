@@ -3,6 +3,7 @@
 #include <vector>
 #include <iomanip>
 #include <chrono>
+#include <windows.h>
 
 
 using namespace std;
@@ -15,6 +16,17 @@ using namespace std::chrono;
 vector<int> numList;
 int swapNums = 0;
 
+//This code block is referenced from https://stackoverflow.com/questions/5866529/how-do-we-clear-the-console-in-assembly/5866648#5866648 - StackOverflow user - Jerry Coffin
+void clear_screen(char fill = ' ') {
+	COORD tl = { 0,0 };
+	CONSOLE_SCREEN_BUFFER_INFO s;
+	HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+	GetConsoleScreenBufferInfo(console, &s);
+	DWORD written, cells = s.dwSize.X * s.dwSize.Y;
+	FillConsoleOutputCharacter(console, fill, cells, tl, &written);
+	FillConsoleOutputAttribute(console, s.wAttributes, cells, tl, &written);
+	SetConsoleCursorPosition(console, tl);
+}//
 
 void genNums(int amount) {
 
@@ -32,6 +44,8 @@ void genNums(int amount) {
 
 void printLine(vector<int>numList, int length, int n) {
 
+	HANDLE  hConsole;
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	bool finished = true;
 
@@ -57,6 +71,7 @@ void printLine(vector<int>numList, int length, int n) {
 			int number = numList[i] - n;
 			if (number > 0) {
 
+				SetConsoleTextAttribute(hConsole, 14);
 				cout << "| ";
 			}
 			else {
@@ -94,6 +109,11 @@ void bubbleSort(vector<int>&numList, int n) {
 
 		printLine(numList, n, 0);
 		cout << "\n\n";
+
+		if (i != n - 2) {
+			
+			clear_screen();
+		}
 	}
 	}
 
@@ -109,6 +129,8 @@ int main() {
 
 
 	srand(time(NULL));
+	HANDLE  hConsole;
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	int dataSize;
 	float seconds;
@@ -141,6 +163,7 @@ int main() {
 	seconds = duration.count() / 1e+6;
 
 
+	SetConsoleTextAttribute(hConsole, 7);
 
 	cout << "Number of swaps made: " << swapNums<<"\n";
 	cout << "Time taken: " << seconds << " seconds";

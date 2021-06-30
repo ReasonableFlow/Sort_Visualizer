@@ -42,7 +42,7 @@ void genNums(int amount) {
 
 }
 
-void printLine(vector<int>numList, int length, int n) {
+void printLine(vector<int>numList, int length, int n, int colourSize) {
 
 	HANDLE  hConsole;
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -62,7 +62,7 @@ void printLine(vector<int>numList, int length, int n) {
 	}
 	else {
 
-		printLine(numList, length, n + 1);
+		printLine(numList, length, n + 1,colourSize);
 
 
 
@@ -71,7 +71,7 @@ void printLine(vector<int>numList, int length, int n) {
 			int number = numList[i] - n;
 			if (number > 0) {
 
-				SetConsoleTextAttribute(hConsole, 14);
+				SetConsoleTextAttribute(hConsole, colourSize);
 				cout << "| ";
 			}
 			else {
@@ -95,7 +95,7 @@ void swap(int* xp, int* yp) {
 }
 
 
-void bubbleSort(vector<int>&numList, int n) {
+void bubbleSort(vector<int>&numList, int n, int colourSize) {
 	
 	for (int i = 0; i < n - 1; i++) {
 
@@ -107,7 +107,7 @@ void bubbleSort(vector<int>&numList, int n) {
 			}
 		}
 
-		printLine(numList, n, 0);
+		printLine(numList, n, 0,colourSize);
 		cout << "\n\n";
 
 		if (i != n - 2) {
@@ -134,9 +134,23 @@ int main() {
 
 	int dataSize;
 	float seconds;
+	int colSize;
 
 	cout << "Enter the size of the array: ";
 	cin >> dataSize;
+
+
+	for (int k = 10; k < 16; k++)
+	{
+		
+		SetConsoleTextAttribute(hConsole, k);
+		cout << k << ": Test" << endl;
+	}
+
+
+	SetConsoleTextAttribute(hConsole, 7);
+	cout << "\nChoose which colour you want: ";
+	cin >> colSize;
 
 
 	genNums(dataSize);
@@ -149,11 +163,11 @@ int main() {
 
 
 	int length = numList.size();
-	printLine(numList,length,0);
+	printLine(numList,length,0, colSize);
 
 
 	auto start = high_resolution_clock::now();
-	bubbleSort(numList, length);
+	bubbleSort(numList, length,colSize);
 	auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(stop - start);
 

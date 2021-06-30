@@ -7,16 +7,15 @@
 
 using namespace std;
 
-#define MAX_ARY_SIZE 15
 
 #include "QuickSort.h"
 
 vector<int> numList;
-vector<int> sortedList;
+
 
 void genNums(int amount) {
 
-	//vector<int> numList;
+	
 	int num;
 
 	for (int i = 0; i < amount; i++) {
@@ -35,14 +34,13 @@ void swap(int* xp, int* yp)
 	*yp = temp;
 }
 
-// A function to implement bubble sort 
+
 void bubbleSort(vector<int>&numList, int n)
 {
-	//int i, j;
-	int k;
+	
 	for (int i = 0; i < n - 1; i++) {
 
-		// Last i elements are already in place 
+		
 		for (int j = 0; j < n - i - 1; j++) {
 			if (numList[j] > numList[j + 1]) {
 				swap(&numList[j], &numList[j + 1]);
@@ -91,21 +89,6 @@ void printLine(vector<int>numList,int length,int n) {
 		
 		cout << "\n";
 	}
-	
-
-	/*for (int i = 0; i < numList.size(); i++) {
-
-		
-		for (int j = 0; j < numList[i]; j++) {
-
-
-			cout << "|";
-		}
-
-		cout << "\n";
-
-
-	}*/
 
 
 }
@@ -114,14 +97,10 @@ void printLine(vector<int>numList,int length,int n) {
 
 int main() {
 
-	
-	int i;
+
 
 	srand(time(NULL));
-	//int ary[MAX_ARY_SIZE] = { 89, 72, 3, 15, 21, 57, 61, 44, 19, 98, 5, 77, 39,
-	//		59, 61 }; // ary
 
-//	Statements
 	int dataSize;
 
 	cout << "Enter the size of the array: ";
@@ -130,7 +109,7 @@ int main() {
 
 	genNums(dataSize);
 	cout << "Unsorted array: ";
-	for (i = 0; i < numList.size(); i++) {
+	for (int i = 0; i < numList.size(); i++) {
 		cout << setw(3) << numList[i];
 	}
 

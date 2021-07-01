@@ -13,8 +13,6 @@ using namespace std::chrono;
 
 #include "QuickSort.h"
 
-//vector<int> numList;
-int swapNums = 0;
 
 //This code block is referenced from https://stackoverflow.com/questions/5866529/how-do-we-clear-the-console-in-assembly/5866648#5866648 - StackOverflow user - Jerry Coffin
 void clear_screen(char fill = ' ') {
@@ -91,7 +89,7 @@ void swap(int* xp, int* yp) {
 }
 
 
-void bubbleSort(vector<int>&numList, int n, int colourSize) {
+void bubbleSort(vector<int>&numList, int n, int colourSize, int& swaps) {
 	
 	for (int i = 0; i < n - 1; i++) {
 
@@ -99,7 +97,7 @@ void bubbleSort(vector<int>&numList, int n, int colourSize) {
 		for (int j = 0; j < n - i - 1; j++) {
 			if (numList[j] > numList[j + 1]) {
 				swap(&numList[j], &numList[j + 1]);
-				swapNums++;
+				swaps++;
 			}
 		}
 
@@ -122,11 +120,14 @@ int main() {
 	srand(time(NULL));
 	HANDLE  hConsole;
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
 	vector<int> numList;
 	int dataSize;
 	float seconds;
 	int colSize;
 	char choice;
+	int swapNums = 0;
+
 
 	cout << "Enter the size of the array: ";
 	cin >> dataSize;
@@ -169,7 +170,7 @@ int main() {
 
 
 		auto start = high_resolution_clock::now();
-		bubbleSort(numList, length, colSize);
+		bubbleSort(numList, length, colSize, swapNums);
 		auto stop = high_resolution_clock::now();
 		auto duration = duration_cast<microseconds>(stop - start);
 

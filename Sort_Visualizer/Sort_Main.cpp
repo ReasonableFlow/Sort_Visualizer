@@ -64,8 +64,6 @@ void printLine(vector<int>numList, int length, int n, int colourSize) {
 
 		printLine(numList, length, n + 1,colourSize);
 
-
-
 		for (int i = 0; i < length; i++) {
 
 			int number = numList[i] - n;
@@ -83,8 +81,6 @@ void printLine(vector<int>numList, int length, int n, int colourSize) {
 
 		cout << "\n";
 	}
-
-
 }
 
 
@@ -115,15 +111,10 @@ void bubbleSort(vector<int>&numList, int n, int colourSize) {
 			clear_screen();
 		}
 	}
-	}
+
+}
 
 	
-
-
-
-
-
-
 int main() {
 
 
@@ -135,6 +126,7 @@ int main() {
 	int dataSize;
 	float seconds;
 	int colSize;
+	char choice;
 
 	cout << "Enter the size of the array: ";
 	cin >> dataSize;
@@ -163,24 +155,39 @@ int main() {
 
 
 	int length = numList.size();
-	printLine(numList,length,0, colSize);
-
-
-	auto start = high_resolution_clock::now();
-	bubbleSort(numList, length,colSize);
-	auto stop = high_resolution_clock::now();
-	auto duration = duration_cast<microseconds>(stop - start);
-
-
-
-	cout << "\n\n\n";
-	seconds = duration.count() / 1e+6;
-
+	printLine(numList, length, 0, colSize);
 
 	SetConsoleTextAttribute(hConsole, 7);
+	cout << "\nThis is the array, do you wish to proceed to sort? (y/n): ";
+	cin >> choice;
+	
 
-	cout << "Number of swaps made: " << swapNums<<"\n";
-	cout << "Time taken: " << seconds << " seconds";
+
+	if (choice == 'y') {
+
+		printLine(numList, length, 0, colSize);
+
+
+		auto start = high_resolution_clock::now();
+		bubbleSort(numList, length, colSize);
+		auto stop = high_resolution_clock::now();
+		auto duration = duration_cast<microseconds>(stop - start);
+
+
+
+		cout << "\n\n\n";
+		seconds = duration.count() / 1e+6;
+
+
+		SetConsoleTextAttribute(hConsole, 7);
+
+		cout << "Number of swaps made: " << swapNums << "\n";
+		cout << "Time taken: " << seconds << " seconds";
+	}
+	else if (choice == 'n') {
+
+		return 0;
+	}
 	
 
 	/*QuickSort qs(numList);
@@ -188,5 +195,5 @@ int main() {
 	qs.print();*/
 	
 
-	return 0;
+	//return 0;
 }

@@ -13,7 +13,7 @@ using namespace std::chrono;
 
 #include "QuickSort.h"
 
-vector<int> numList;
+//vector<int> numList;
 int swapNums = 0;
 
 //This code block is referenced from https://stackoverflow.com/questions/5866529/how-do-we-clear-the-console-in-assembly/5866648#5866648 - StackOverflow user - Jerry Coffin
@@ -28,7 +28,7 @@ void clear_screen(char fill = ' ') {
 	SetConsoleCursorPosition(console, tl);
 }//
 
-void genNums(int amount) {
+void genNums(int amount, vector<int>& numList) {
 
 	
 	int num;
@@ -42,7 +42,7 @@ void genNums(int amount) {
 
 }
 
-void printLine(vector<int>numList, int length, int n, int colourSize) {
+void printLine(vector<int>&numList, int length, int n, int colourSize) {
 
 	HANDLE  hConsole;
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -122,7 +122,7 @@ int main() {
 	srand(time(NULL));
 	HANDLE  hConsole;
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
+	vector<int> numList;
 	int dataSize;
 	float seconds;
 	int colSize;
@@ -145,7 +145,7 @@ int main() {
 	cin >> colSize;
 
 
-	genNums(dataSize);
+	genNums(dataSize,numList);
 	cout << "Unsorted array: ";
 	for (int i = 0; i < numList.size(); i++) {
 		cout << setw(3) << numList[i];

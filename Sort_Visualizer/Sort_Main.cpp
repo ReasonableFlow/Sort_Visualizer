@@ -181,13 +181,19 @@ int main() {
 
 
 		SetConsoleTextAttribute(hConsole, 7);
+	
 
 		cout << "Number of swaps made: " << swapNums << "\n";
 		cout << "Time taken: " << seconds << " seconds";
+
+
+		cout << "\nThis is the array sorted? Press (n) to close program: ";
+		cin >> choice;
 	}
 	else if (choice == 'n') {
 
 		return 0;
+		
 	}
 	
 
